@@ -24,3 +24,11 @@ vim.keymap.set("n", ",b", "<CMD>lua require(\"fzf-lua\").buffers()<CR>")
 vim.keymap.set("n", ",r", "<CMD>lua require(\"fzf-lua\").tags()<CR>")
 
 require("plugins").setup()
+
+vim.cmd([[
+  augroup black_on_save
+    autocmd!
+    autocmd BufPreWrite *.py Black
+    autocmd BufPreWrite *.py isort
+  augroup end
+]])
