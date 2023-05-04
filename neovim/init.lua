@@ -25,10 +25,6 @@ vim.keymap.set("n", ",r", "<CMD>lua require(\"fzf-lua\").tags()<CR>")
 
 require("plugins").setup()
 
-vim.cmd([[
-  augroup black_on_save
-    autocmd!
-    autocmd BufPreWrite *.py Black
-    autocmd BufPreWrite *.py isort
-  augroup end
-]])
+vim.cmd("syntax on")
+vim.cmd("hi Visual ctermfg=NONE ctermbg=254")
+vim.cmd("autocmd BufWritePre * :%s/\\s\\+$//ge")

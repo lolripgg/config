@@ -12,14 +12,6 @@ function M.setup()
     use 'wbthomason/packer.nvim'
 
     use({
-      "Shatur/neovim-ayu",
-      config = function ()
-        require('ayu').setup({})
-        vim.cmd('colorscheme ayu')
-      end
-    })
-
-    use({
       "easymotion/vim-easymotion",
       config = function ()
         vim.g.EasyMotion_smartcase = 1
@@ -30,16 +22,12 @@ function M.setup()
 
     use("editorconfig/editorconfig-vim")
 
-    use("fisadev/vim-isort")
-
     use({
       "ibhagwan/fzf-lua",
       requires = {
         "nvim-tree/nvim-web-devicons",
       },
     })
-
-    -- use("ludovicchabant/vim-gutentags")
 
     use({
       "neovim/nvim-lspconfig",
@@ -91,6 +79,40 @@ function M.setup()
             )
           end,
         })
+
+        lspconfig.ruff_lsp.setup({
+          init_options = {
+            settings = {
+              args = {},
+            },
+          },
+          on_attach = function (client, bufnr)
+            local opts = { noremap=true, silent=true }
+            vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
+            vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
+            vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
+            vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
+
+            -- Mappings.
+            -- See `:help vim.lsp.*` for documentation on any of the below functions
+            local bufopts = { noremap=true, silent=true, buffer=bufnr }
+            vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
+            vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
+            vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
+            vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
+            vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
+            vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, bufopts)
+            vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
+            vim.keymap.set('n', '<space>wl', function()
+              print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+            end, bufopts)
+            vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, bufopts)
+            vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
+            vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
+            vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
+            vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format { async = true } end, bufopts)
+          end,
+        })
       end,
     })
 
@@ -115,27 +137,6 @@ function M.setup()
         vim.keymap.set("n", "<Leader>nr", ":NERDTreeFind<CR>")
       end,
     })
-
-    use("psf/black")
-
-    -- use({
-    --   "skywind3000/gutentags_plus",
-    --   config = function ()
-    --     vim.g.gutentags_cache_dir = "/Users/james/.cache/tags"
-    --     vim.g.gutentags_modules = {"ctags", "gtags_cscope"}
-    --     vim.g.gutentags_plus_switch = 1
-    --
-    --     vim.keymap.set("n", "<Leader>td", "<Plug>GscopeFindDefinition")
-    --   end,
-    -- })
-
-    -- use({
-    --   "preservim/tagbar",
-    --   config = function ()
-    --     vim.keymap.set("n", "<Leader>tt", ":TagbarOpen fj<CR>")
-    --     vim.keymap.set("n", "<Leader>tc", ":TagbarClose<CR>")
-    --   end,
-    -- })
   end)
 end
 
