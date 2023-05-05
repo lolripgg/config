@@ -22,6 +22,8 @@ function M.setup()
 
     use("editorconfig/editorconfig-vim")
 
+    use("fisadev/vim-isort")
+
     use({
       "ibhagwan/fzf-lua",
       requires = {
@@ -137,6 +139,8 @@ function M.setup()
         vim.keymap.set("n", "<Leader>nr", ":NERDTreeFind<CR>")
       end,
     })
+
+    use("psf/black")
   end)
 end
 

@@ -10,6 +10,7 @@ fi
 
 mkdir -p $NVIM_CONFIG_PATH/lua
 ln -sF $NVIM_CONFIG_GIT_PATH/init.lua $NVIM_CONFIG_PATH/init.lua
+ln -sF $NVIM_CONFIG_GIT_PATH/lua/autocmd.lua $NVIM_CONFIG_PATH/lua/autocmd.lua
 ln -sF $NVIM_CONFIG_GIT_PATH/lua/keymaps.lua $NVIM_CONFIG_PATH/lua/keymaps.lua
 ln -sF $NVIM_CONFIG_GIT_PATH/lua/options.lua $NVIM_CONFIG_PATH/lua/options.lua
 ln -sF $NVIM_CONFIG_GIT_PATH/lua/plugins.lua $NVIM_CONFIG_PATH/lua/plugins.lua

@@ -11,5 +11,5 @@ vim.keymap.set("n", "<Leader>cl", ":let @*=expand('%:p')<CR>")
 vim.keymap.set(
   "n",
   "<Leader>t",
-  "<CMD>lua require(\"fzf-lua\").files({ cmd=\"rg --files --follow --global '!.git/*' --glob '!vendor/' --hidden\" })<CR>"
+  "<CMD>lua require(\"fzf-lua\").files({ cmd=\"rg --files --follow --glob '!.git/*' --glob '!vendor/' --hidden\" })<CR>"
 )

@@ -1,4 +1,5 @@
 vim.g.mapleader = ","
+vim.g.python3_host_prog = "/Users/james/.asdf/shims/python"
 vim.opt.clipboard = "unnamedplus"
 vim.opt.expandtab = true
 vim.opt.hlsearch = false
